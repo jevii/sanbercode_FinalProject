@@ -19,7 +19,7 @@ class LoginHRM(unittest.TestCase):
 
         # Login Action
         username.clear()
-        username.send_keys('Admin')
+        username.send_keys('admin')
 
         password.clear()
         password.send_keys('admin123')
@@ -40,7 +40,7 @@ class LoginHRM(unittest.TestCase):
 
         # Login Action
         username.clear()
-        username.send_keys('Admin0123478')
+        username.send_keys('admin123')
 
         password.clear()
         password.send_keys('admin123')
@@ -48,9 +48,28 @@ class LoginHRM(unittest.TestCase):
         login_btn.click()
         time.sleep(5)
 
-        driver.close()
+    def test_login_empty(self):
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        driver.maximize_window()
 
-test_obj = LoginHRM()
+        driver.get("https://opensource-demo.orangehrmlive.com/")
+
+        # Find Elements
+        username = driver.find_element(By.XPATH, '//*[@id="txtUsername"]')
+        password = driver.find_element(By.CSS_SELECTOR, '#txtPassword')
+        login_btn = driver.find_element(By.ID, 'btnLogin')
+
+        # Login Action
+        username.clear()
+        username.send_keys('')
+
+        password.clear()
+        password.send_keys('')
+
+        login_btn.click()
+        time.sleep(5)    
+
+        driver.close()
 
 if __name__ == '__main__':
     unittest.main()
