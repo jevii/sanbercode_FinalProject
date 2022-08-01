@@ -34,11 +34,6 @@ class AddEmployee(unittest.TestCase):
         # Click Add Employee
         driver.find_element(By.LINK_TEXT, 'Add Employee').click()
 
-        # Click Edit
-        # edit = driver.find_element(By.ID, 'btnSave')
-        # edit.click()
-        # time.sleep(3)
-
         first_name = driver.find_element(By.XPATH, '//*[@id="firstName"]')
         first_name.clear()
         first_name.send_keys('Jarvis')
@@ -63,26 +58,6 @@ class AddEmployee(unittest.TestCase):
         save = driver.find_element(By.ID, 'btnSave')
         save.click()
         time.sleep(2)
-
-
-        # select_file = driver.find_element(By.ID, 'ufile')
-        # select_file.send_keys('C:\\Users\\morsh\\Desktop\\selenium_logo.png')
-
-        # comment = driver.find_element(By.ID, 'txtAttDesc')
-        # comment.send_keys('The image uploaded successfully')
-
-        # upload = driver.find_element(By.ID, 'btnSaveAttachment')
-        # upload.click()
-
-        # checkbox = driver.find_element(By.ID, 'attachmentsCheckAll')
-        # status = checkbox.is_selected()
-
-        # if not status:
-        #     checkbox.click()
-        #     time.sleep(5)
-
-        # delete = driver.find_element(By.ID, 'btnDeleteAttachment')
-        # delete.click()
 
         driver.close()
 

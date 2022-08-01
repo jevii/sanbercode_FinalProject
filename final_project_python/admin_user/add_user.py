@@ -31,7 +31,7 @@ class AddUser(unittest.TestCase):
         # Admin Link Click
         driver.find_element(By.LINK_TEXT, 'Admin').click()
 
-        # Click Edit
+        # Click Add
         edit = driver.find_element(By.ID, 'btnAdd')
         edit.click()
         time.sleep(3)
