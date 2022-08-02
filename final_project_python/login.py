@@ -48,6 +48,10 @@ class LoginHRM(unittest.TestCase):
         login_btn.click()
         time.sleep(5)
 
+        # Validasi
+        response_data = driver.find_element(By.ID,"spanMessage").text
+        self.assertIn('Invalid credentials', response_data)
+
     def test_login_empty(self):
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         driver.maximize_window()
@@ -67,7 +71,11 @@ class LoginHRM(unittest.TestCase):
         password.send_keys('')
 
         login_btn.click()
-        time.sleep(5)    
+        time.sleep(5)
+
+        # Validasi
+        response_data = driver.find_element(By.ID,"spanMessage").text
+        self.assertIn('cannot be empty', response_data)
 
         driver.close()
 

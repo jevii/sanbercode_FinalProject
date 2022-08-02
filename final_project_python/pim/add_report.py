@@ -1,4 +1,5 @@
 import unittest
+from attr import field
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -7,8 +8,8 @@ from selenium.webdriver.support.ui import Select
 import time
 
 
-class AddEmployee(unittest.TestCase):
-    def test_add_employee(self):
+class AddReport(unittest.TestCase):
+    def test_add_report(self):
         base_url = 'https://opensource-demo.orangehrmlive.com/'
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         driver.maximize_window()
@@ -32,34 +33,58 @@ class AddEmployee(unittest.TestCase):
         driver.find_element(By.LINK_TEXT, 'PIM').click()
 
         # Click Add Employee
-        driver.find_element(By.LINK_TEXT, 'Add Employee').click()
+        driver.find_element(By.LINK_TEXT, 'Reports').click()
 
-        first_name = driver.find_element(By.XPATH, '//*[@id="firstName"]')
-        first_name.clear()
-        first_name.send_keys('Jarvis')
+        # Click Add
+        add = driver.find_element(By.ID, 'btnAdd')
+        add.click()
+        time.sleep(3)
+
+        report_name = driver.find_element(By.ID, 'report_report_name')
+        report_name.clear()
+        report_name.send_keys('Test Report')
         time.sleep(1)
 
-        middle_name = driver.find_element(By.XPATH, '//*[@id="middleName"]')
-        middle_name.clear()
-        middle_name.send_keys('Friday')
+        select_criteria = driver.find_element(By.ID, 'report_criteria_list')
+        sel = Select(select_criteria)
+        sel.select_by_value('job_title')
         time.sleep(1)
 
-        last_name = driver.find_element(By.XPATH, '//*[@id="lastName"]')
-        last_name.clear()
-        last_name.send_keys('Test')
+        add_criteria = driver.find_element(By.ID, 'btnAddConstraint')
+        add_criteria.click()
+        time.sleep(3)
+
+        job_title = driver.find_element(By.ID, 'report_job_title')
+        sel = Select(job_title)
+        sel.select_by_value('26')
         time.sleep(1)
 
-        employee_id = driver.find_element(By.ID, 'employeeId')
-        employee_id.clear()
-        employee_id.send_keys('464026')
+        field_group = driver.find_element(By.ID, 'report_display_groups')
+        sel = Select(field_group)
+        sel.select_by_value('display_group_4')
         time.sleep(1)
+
+        job_title = driver.find_element(By.ID, 'report_display_field_list')
+        sel = Select(job_title)
+        sel.select_by_value('display_field_32')
+        time.sleep(1)
+
+        add_display = driver.find_element(By.ID, 'btnAddDisplayGroup')
+        add_display.click()
+        time.sleep(3)
+
+        checkbox = driver.find_element(By.ID, 'display_group_4')
+        status = checkbox.is_selected()
+        if not status:
+            checkbox.click()
+            time.sleep(2)
 
         # Click Save
         save = driver.find_element(By.ID, 'btnSave')
         save.click()
         time.sleep(2)
 
-    def test_add_employee_empty(self):
+    def test_add_report_empty(self):
         base_url = 'https://opensource-demo.orangehrmlive.com/'
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         driver.maximize_window()
@@ -83,26 +108,16 @@ class AddEmployee(unittest.TestCase):
         driver.find_element(By.LINK_TEXT, 'PIM').click()
 
         # Click Add Employee
-        driver.find_element(By.LINK_TEXT, 'Add Employee').click()
+        driver.find_element(By.LINK_TEXT, 'Reports').click()
 
-        first_name = driver.find_element(By.XPATH, '//*[@id="firstName"]')
-        first_name.clear()
-        first_name.send_keys('')
-        time.sleep(1)
+        # Click Add
+        add = driver.find_element(By.ID, 'btnAdd')
+        add.click()
+        time.sleep(3)
 
-        middle_name = driver.find_element(By.XPATH, '//*[@id="middleName"]')
-        middle_name.clear()
-        middle_name.send_keys('')
-        time.sleep(1)
-
-        last_name = driver.find_element(By.XPATH, '//*[@id="lastName"]')
-        last_name.clear()
-        last_name.send_keys('')
-        time.sleep(1)
-
-        employee_id = driver.find_element(By.ID, 'employeeId')
-        employee_id.clear()
-        employee_id.send_keys('')
+        report_name = driver.find_element(By.ID, 'report_report_name')
+        report_name.clear()
+        report_name.send_keys('')
         time.sleep(1)
 
         # Click Save
@@ -110,7 +125,7 @@ class AddEmployee(unittest.TestCase):
         save.click()
         time.sleep(2)
 
-        response_data = driver.find_element(By.XPATH,"/html/body/div[1]/div[3]/div/div[2]/form/fieldset/ol/li[1]/ol/li[3]/span").text
+        response_data = driver.find_element(By.CLASS_NAME,'validation-error').text
         self.assertIn(response_data,"Required")
 
         driver.close()

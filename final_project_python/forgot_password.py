@@ -23,5 +23,9 @@ class ForgotPawwsord(unittest.TestCase):
         forgot.click()
         time.sleep(2)
 
+        # Validasi
+        response_data = driver.find_element(By.ID,"divContent").text
+        self.assertIn('Instructions for resetting', response_data)
+
 if __name__ == '__main__':
     unittest.main()
