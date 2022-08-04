@@ -21,10 +21,10 @@ class Immigration(unittest.TestCase):
 
         # Login Action
         username.clear()
-        username.send_keys('jarvis')
+        username.send_keys('admin')
 
         password.clear()
-        password.send_keys('masuk123')
+        password.send_keys('admin123')
 
         login_btn.click()
 

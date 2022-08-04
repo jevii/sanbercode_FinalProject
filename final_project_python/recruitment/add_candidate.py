@@ -8,8 +8,8 @@ from selenium.webdriver.support.ui import Select
 import time
 
 
-class AddReport(unittest.TestCase):
-    def test_add_report(self):
+class AddCandidate(unittest.TestCase):
+    def test_add_candidate(self):
         base_url = 'https://opensource-demo.orangehrmlive.com/'
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         driver.maximize_window()
@@ -30,61 +30,48 @@ class AddReport(unittest.TestCase):
         login_btn.click()
 
         # PIM Link Click
-        driver.find_element(By.LINK_TEXT, 'PIM').click()
-
-        # Report
-        driver.find_element(By.LINK_TEXT, 'Reports').click()
+        driver.find_element(By.LINK_TEXT, 'Recruitment').click()
 
         # Click Add
         add = driver.find_element(By.ID, 'btnAdd')
         add.click()
         time.sleep(3)
 
-        report_name = driver.find_element(By.ID, 'report_report_name')
-        report_name.clear()
-        report_name.send_keys('Test Report')
+        first_name = driver.find_element(By.XPATH, '//*[@id="addCandidate_firstName"]')
+        first_name.clear()
+        first_name.send_keys('Jarvis')
         time.sleep(1)
 
-        select_criteria = driver.find_element(By.ID, 'report_criteria_list')
-        sel = Select(select_criteria)
-        sel.select_by_value('job_title')
+        middle_name = driver.find_element(By.XPATH, '//*[@id="addCandidate_middleName"]')
+        middle_name.clear()
+        middle_name.send_keys('Friday')
         time.sleep(1)
 
-        add_criteria = driver.find_element(By.ID, 'btnAddConstraint')
-        add_criteria.click()
-        time.sleep(3)
-
-        job_title = driver.find_element(By.ID, 'report_job_title')
-        sel = Select(job_title)
-        sel.select_by_value('26')
+        last_name = driver.find_element(By.XPATH, '//*[@id="addCandidate_lastName"]')
+        last_name.clear()
+        last_name.send_keys('Test')
         time.sleep(1)
 
-        field_group = driver.find_element(By.ID, 'report_display_groups')
-        sel = Select(field_group)
-        sel.select_by_value('display_group_4')
+        email = driver.find_element(By.ID, 'addCandidate_email')
+        email.clear()
+        email.send_keys('test@mail.com')
         time.sleep(1)
 
-        job_title = driver.find_element(By.ID, 'report_display_field_list')
-        sel = Select(job_title)
-        sel.select_by_value('display_field_32')
+        contact = driver.find_element(By.ID, 'addCandidate_contactNo')
+        contact.clear()
+        contact.send_keys('01237736')
+
+        job_vacancy = driver.find_element(By.ID, 'addCandidate_vacancy')
+        sel = Select(job_vacancy)
+        sel.select_by_value('5')
         time.sleep(1)
-
-        add_display = driver.find_element(By.ID, 'btnAddDisplayGroup')
-        add_display.click()
-        time.sleep(3)
-
-        checkbox = driver.find_element(By.ID, 'display_group_4')
-        status = checkbox.is_selected()
-        if not status:
-            checkbox.click()
-            time.sleep(2)
 
         # Click Save
         save = driver.find_element(By.ID, 'btnSave')
         save.click()
         time.sleep(2)
 
-    def test_add_report_empty(self):
+    def test_add_candidate_required(self):
         base_url = 'https://opensource-demo.orangehrmlive.com/'
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         driver.maximize_window()
@@ -105,20 +92,41 @@ class AddReport(unittest.TestCase):
         login_btn.click()
 
         # PIM Link Click
-        driver.find_element(By.LINK_TEXT, 'PIM').click()
-
-        # Click Add Employee
-        driver.find_element(By.LINK_TEXT, 'Reports').click()
+        driver.find_element(By.LINK_TEXT, 'Recruitment').click()
 
         # Click Add
         add = driver.find_element(By.ID, 'btnAdd')
         add.click()
         time.sleep(3)
 
-        report_name = driver.find_element(By.ID, 'report_report_name')
-        report_name.clear()
-        report_name.send_keys('')
+        first_name = driver.find_element(By.XPATH, '//*[@id="addCandidate_firstName"]')
+        first_name.clear()
+        first_name.send_keys('')
         time.sleep(1)
+
+        middle_name = driver.find_element(By.XPATH, '//*[@id="addCandidate_middleName"]')
+        middle_name.clear()
+        middle_name.send_keys('')
+        time.sleep(1)
+
+        last_name = driver.find_element(By.XPATH, '//*[@id="addCandidate_lastName"]')
+        last_name.clear()
+        last_name.send_keys('')
+        time.sleep(1)
+
+        email = driver.find_element(By.ID, 'addCandidate_email')
+        email.clear()
+        email.send_keys('')
+        time.sleep(1)
+
+        # contact = driver.find_element(By.ID, 'addCandidate_contactNo')
+        # contact.clear()
+        # contact.send_keys('01237736')
+
+        # job_vacancy = driver.find_element(By.ID, 'addCandidate_vacancy')
+        # sel = Select(job_vacancy)
+        # sel.select_by_value('5')
+        # time.sleep(1)
 
         # Click Save
         save = driver.find_element(By.ID, 'btnSave')

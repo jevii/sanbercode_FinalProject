@@ -21,10 +21,10 @@ class Personal(unittest.TestCase):
 
         # Login Action
         username.clear()
-        username.send_keys('jarvis')
+        username.send_keys('admin')
 
         password.clear()
-        password.send_keys('masuk123')
+        password.send_keys('admin123')
 
         login_btn.click()
 
@@ -107,15 +107,6 @@ class Personal(unittest.TestCase):
         nick_name.clear()
         nick_name.send_keys('Jarvish')
         time.sleep(1)
-
-        '''
-        smoker = driver.find_element(By.ID, 'personal_chkSmokeFlag')
-        status = smoker.is_selected()
-
-        if not status:
-            smoker.click()
-            time.sleep(2)
-        '''
 
         military_service = driver.find_element(By.ID, 'personal_txtMilitarySer')
         military_service.clear()
